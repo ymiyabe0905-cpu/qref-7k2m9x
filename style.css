@@ -227,10 +227,79 @@ html, body {
   cursor: pointer;
 }
 
+/* ===== Mobile compact (smartphone) ===== */
+@media (max-width: 899px) {
+  .app-header {
+    padding: 8px 12px 6px;
+    padding-top: max(8px, env(safe-area-inset-top));
+  }
+
+  .header-top {
+    margin-bottom: 6px;
+  }
+
+  .app-header h1 {
+    font-size: 15px;
+  }
+
+  .search-bar {
+    margin-bottom: 6px;
+  }
+
+  .search-bar input {
+    height: 40px;
+    font-size: 15px;
+  }
+
+  .filters {
+    gap: 4px;
+  }
+
+  .filter-group {
+    align-items: center;
+    gap: 6px;
+  }
+
+  .filter-label {
+    flex: 0 0 auto;
+    padding-top: 0;
+    font-size: 11px;
+    min-width: 48px;
+  }
+
+  .chips {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    padding-bottom: 2px;
+    scroll-snap-type: x proximity;
+  }
+
+  .chips::-webkit-scrollbar {
+    height: 0;
+    display: none;
+  }
+
+  .chip {
+    flex-shrink: 0;
+    min-height: 28px;
+    padding: 0 10px;
+    font-size: 12px;
+    scroll-snap-align: start;
+  }
+
+  .layout {
+    padding: 8px;
+    gap: 8px;
+  }
+}
+
 /* ===== Matrix ===== */
 .matrix-wrapper {
   overflow: auto;
-  max-height: calc(100vh - 280px);
+  max-height: calc(100vh - 220px);
   -webkit-overflow-scrolling: touch;
 }
 
