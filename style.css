@@ -375,6 +375,43 @@ table#matrixTable tbody td.selected {
   outline-offset: -2px;
 }
 
+/* ===== Highlight (filter as spotlight) ===== */
+table#matrixTable thead th.hl-col,
+table#matrixTable tbody td.hl-col {
+  background: #fef9c3;
+}
+
+table#matrixTable thead th.hl-col {
+  background: #fde68a;
+  color: #78350f;
+}
+
+table#matrixTable tbody tr.hl-row > th,
+table#matrixTable tbody tr.hl-row > td {
+  background: #fef9c3;
+}
+
+table#matrixTable tbody tr.hl-row > th {
+  background: #fde68a;
+  color: #78350f;
+}
+
+table#matrixTable tbody td.hl-cross {
+  background: #fbbf24 !important;
+  outline: 2px solid #d97706;
+  outline-offset: -2px;
+}
+
+table#matrixTable tbody td.dimmed,
+table#matrixTable tbody td.dimmed .cell-mark,
+table#matrixTable tbody td.dimmed .cell-empty {
+  opacity: 0.35;
+}
+
+table#matrixTable tbody td.dimmed .cell-badge {
+  opacity: 0.5;
+}
+
 .cell-mark {
   font-size: 20px;
   font-weight: 700;

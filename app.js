@@ -70,7 +70,8 @@ function renderChips() {
 
   $('#categoryChips').querySelectorAll('.chip').forEach(chip => {
     chip.addEventListener('click', () => {
-      state.selectedCategoryId = chip.dataset.id || null;
+      const id = chip.dataset.id || null;
+      state.selectedCategoryId = (state.selectedCategoryId === id) ? null : id;
       renderChips();
       renderMatrix();
     });
@@ -78,7 +79,8 @@ function renderChips() {
 
   $('#institutionChips').querySelectorAll('.chip').forEach(chip => {
     chip.addEventListener('click', () => {
-      state.selectedInstitutionId = chip.dataset.id || null;
+      const id = chip.dataset.id || null;
+      state.selectedInstitutionId = (state.selectedInstitutionId === id) ? null : id;
       renderChips();
       renderMatrix();
     });
@@ -95,9 +97,6 @@ function chipHtml(id, selectedId, label) {
 function renderMatrix() {
   const { categories, institutions, protocols } = state.data;
 
-  const visibleInsts = institutions.filter(matchesInstitution);
-  const visibleCats  = categories.filter(matchesCategory);
-
   const visibleProtocols = protocols.filter(p => matchesSearch(p));
   const visibleProtocolSet = new Set(visibleProtocols.map(p => p.id));
 
@@ -106,28 +105,33 @@ function renderMatrix() {
     protocolByKey[`${p.institutionId}|${p.categoryId}`] = p;
   }
 
-  if (visibleInsts.length === 0 || visibleCats.length === 0) {
-    $('#matrixTable').innerHTML = '';
-    $('#emptyState').hidden = false;
-    return;
-  }
+  const selCat  = state.selectedCategoryId;
+  const selInst = state.selectedInstitutionId;
+  const hasFilter = !!(selCat || selInst);
+
   $('#emptyState').hidden = true;
 
   const thead = `<thead><tr>
     <th>医療機関</th>
-    ${visibleCats.map(c => `<th title="${escapeHtml(c.description)}">${escapeHtml(c.name)}</th>`).join('')}
+    ${categories.map(c => {
+      const hl = selCat && c.id === selCat ? ' hl-col' : '';
+      return `<th class="${hl.trim()}" title="${escapeHtml(c.description)}">${escapeHtml(c.name)}</th>`;
+    }).join('')}
   </tr></thead>`;
 
   const tbody = `<tbody>
-    ${visibleInsts.map(inst => {
-      const cells = visibleCats.map(cat => {
+    ${institutions.map(inst => {
+      const rowHl = selInst && inst.id === selInst ? ' hl-row' : '';
+      const cells = categories.map(cat => {
         const p = protocolByKey[`${inst.id}|${cat.id}`];
+        const colHl = selCat && cat.id === selCat ? ' hl-col' : '';
+        const cross = (selCat && cat.id === selCat) && (selInst && inst.id === selInst) ? ' hl-cross' : '';
+        const matchSearch = !p ? false : (state.searchQuery === '' || visibleProtocolSet.has(p.id));
+        const dim = hasFilter && !(rowHl || colHl) ? ' dimmed' : '';
+        const searchDim = state.searchQuery !== '' && p && !matchSearch ? ' dimmed' : '';
+
         if (!p) {
-          return `<td class="no-protocol"><span class="cell-empty">—</span></td>`;
-        }
-        const matchSearch = state.searchQuery === '' || visibleProtocolSet.has(p.id);
-        if (!matchSearch) {
-          return `<td class="no-protocol dimmed"><span class="cell-empty">—</span></td>`;
+          return `<td class="no-protocol${dim}${colHl}"><span class="cell-empty">—</span></td>`;
         }
         const selected = state.selectedProtocolId === p.id ? ' selected' : '';
         const badge = p.feedback === '必要'
@@ -135,13 +139,13 @@ function renderMatrix() {
           : p.feedback === '不要'
           ? `<div class="cell-badge no-report">報告不要</div>`
           : '';
-        return `<td class="has-protocol${selected}" data-pid="${escapeHtml(p.id)}">
+        return `<td class="has-protocol${selected}${dim}${searchDim}${colHl}${cross}" data-pid="${escapeHtml(p.id)}">
           <span class="cell-mark">${escapeHtml(p.simplification || '○')}</span>
           ${badge}
         </td>`;
       }).join('');
-      return `<tr>
-        <th>${escapeHtml(inst.shortName || inst.name)}</th>
+      return `<tr class="${rowHl.trim()}">
+        <th class="${rowHl.trim()}">${escapeHtml(inst.shortName || inst.name)}</th>
         ${cells}
       </tr>`;
     }).join('')}
@@ -156,16 +160,6 @@ function renderMatrix() {
       renderMatrix();
     });
   });
-}
-
-function matchesCategory(c) {
-  if (!state.selectedCategoryId) return true;
-  return c.id === state.selectedCategoryId;
-}
-
-function matchesInstitution(i) {
-  if (!state.selectedInstitutionId) return true;
-  return i.id === state.selectedInstitutionId;
 }
 
 function matchesSearch(p) {
