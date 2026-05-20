@@ -1,0 +1,13 @@
+# Local-only files (not deployed)
+.qpdf/
+serve.ps1
+
+# OS / Editor
+Thumbs.db
+.DS_Store
+.vscode/
+.idea/
+
+# Temp
+*.tmp
+*.bak

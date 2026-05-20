@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="format-detection" content="telephone=yes">
+  <title>疑義照会プロトコル検索</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="app-header">
+    <div class="header-top">
+      <h1>疑義照会プロトコル</h1>
+      <span class="meta" id="metaInfo"></span>
+    </div>
+    <div class="search-bar">
+      <input type="search" id="searchInput" placeholder="医療機関・カテゴリ・キーワードで検索…" autocomplete="off">
+      <button type="button" id="clearBtn" class="clear-btn" aria-label="クリア">×</button>
+    </div>
+    <div class="filters">
+      <div class="filter-group">
+        <span class="filter-label">カテゴリ</span>
+        <div class="chips" id="categoryChips"></div>
+      </div>
+      <div class="filter-group">
+        <span class="filter-label">医療機関</span>
+        <div class="chips" id="institutionChips"></div>
+      </div>
+    </div>
+  </header>
+
+  <main class="layout">
+    <section class="matrix-pane">
+      <div class="pane-header">
+        <h2>一覧</h2>
+        <span class="hint">セルをタップで詳細表示</span>
+      </div>
+      <div class="matrix-wrapper">
+        <table id="matrixTable"></table>
+        <p id="emptyState" class="empty-state" hidden>該当するプロトコルがありません</p>
+      </div>
+    </section>
+
+    <aside class="detail-pane" id="detailPane">
+      <div class="pane-header">
+        <h2>詳細</h2>
+        <button type="button" id="closeDetailBtn" class="close-btn" aria-label="閉じる" hidden>×</button>
+      </div>
+      <div id="detailContent" class="detail-content">
+        <p class="placeholder">マトリクスのセル（○）をタップすると、簡素化条件・連絡先・元 PDF への参照が表示されます。</p>
+      </div>
+    </aside>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
