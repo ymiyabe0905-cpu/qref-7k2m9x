@@ -1,6 +1,7 @@
 # Local-only files (not deployed)
 .qpdf/
 serve.ps1
+NOTES.md
 
 # OS / Editor
 Thumbs.db
