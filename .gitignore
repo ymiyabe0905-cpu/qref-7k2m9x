@@ -3,6 +3,15 @@
 serve.ps1
 NOTES.md
 
+# Icon source and build artifacts (not deployed)
+icons/app-icon-source.png
+icons/build-icons.ps1
+icons/icon-A-check.svg
+icons/icon-B-capsule.svg
+icons/icon-C-cross.svg
+icons/icon-D-shield.svg
+icons/preview.html
+
 # OS / Editor
 Thumbs.db
 .DS_Store
