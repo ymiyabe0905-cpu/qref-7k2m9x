@@ -296,9 +296,7 @@ function renderFeedbackCallout(p, inst) {
 function renderContactActions(p, inst) {
   if (!inst.contactPdf) return '';
   return `
-    <div class="action-row">
-      <a class="pdf-link" href="${escapeHtml(inst.contactPdf)}" target="_blank" rel="noopener">送付先の番号は連絡先一覧（PDF）を参照</a>
-    </div>
+    <p class="callout-pdf-ref">※送付先の番号は、下部「医療機関情報」の連絡先一覧（PDF）を参照してください。</p>
   `;
 }
 

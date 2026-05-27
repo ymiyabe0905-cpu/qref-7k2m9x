@@ -294,6 +294,16 @@ html, body {
     padding: 8px;
     gap: 8px;
   }
+
+  /* スマホは内部スクロールをやめ、ページ全体スクロールに統一 */
+  .matrix-wrapper {
+    max-height: none;
+  }
+
+  .detail-content {
+    max-height: none;
+    overflow-y: visible;
+  }
 }
 
 /* ===== Matrix ===== */
@@ -596,6 +606,14 @@ table#matrixTable tbody td.dimmed .cell-badge {
   margin-top: 4px;
   padding-top: 10px;
   border-top: 1px dashed rgba(0, 0, 0, 0.1);
+}
+
+.callout-pdf-ref {
+  margin: 8px 0 0;
+  padding-top: 10px;
+  border-top: 1px dashed rgba(0, 0, 0, 0.1);
+  font-size: 13px;
+  color: #4b5563;
 }
 
 .detail-section {
