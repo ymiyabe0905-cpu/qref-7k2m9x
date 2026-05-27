@@ -472,19 +472,6 @@ table#matrixTable tbody td.dimmed .cell-badge {
   color: #166534;
 }
 
-.cell-supp {
-  position: absolute;
-  top: 2px;
-  right: 2px;
-  font-size: 9px;
-  font-weight: 700;
-  background: #fde68a;
-  color: #78350f;
-  border-radius: 3px;
-  padding: 0 3px;
-  line-height: 1.5;
-}
-
 .empty-state {
   text-align: center;
   padding: 32px;
@@ -543,7 +530,6 @@ table#matrixTable tbody td.dimmed .cell-badge {
 .badge-report   { background: #fef3c7; color: #92400e; }
 .badge-noreport { background: #e0e7ff; color: #3730a3; }
 .badge-method   { background: #f1f5f9; color: #334155; }
-.badge-supp     { background: #fde68a; color: #78350f; }
 
 /* ===== Feedback Callout (事後報告ハイライト) ===== */
 .feedback-callout {
