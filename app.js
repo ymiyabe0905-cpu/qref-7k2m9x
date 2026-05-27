@@ -294,13 +294,10 @@ function renderFeedbackCallout(p, inst) {
 }
 
 function renderContactActions(p, inst) {
-  const tels = collectPhones(inst).filter(Boolean);
-  const faxes = collectFaxes(inst).filter(Boolean);
-  if (tels.length === 0 && faxes.length === 0) return '';
+  if (!inst.contactPdf) return '';
   return `
     <div class="action-row">
-      ${tels.map(t => `<a class="tel-link" href="tel:${t.replace(/[^\d+]/g,'')}">TEL ${escapeHtml(t)}</a>`).join('')}
-      ${faxes.map(f => `<span class="fax-display">FAX ${escapeHtml(f)}</span>`).join('')}
+      <a class="pdf-link" href="${escapeHtml(inst.contactPdf)}" target="_blank" rel="noopener">送付先の番号は連絡先一覧（PDF）を参照</a>
     </div>
   `;
 }
@@ -316,10 +313,6 @@ function renderInstitutionContacts(inst) {
       <div class="contact-block">
         <div class="contact-label">${escapeHtml(label)}</div>
         <div class="contact-dept">${escapeHtml(c.dept || '')}</div>
-        ${(c.tel || c.fax) ? `<div class="action-row">
-          ${c.tel ? `<a class="tel-link" href="tel:${c.tel.replace(/[^\d+]/g,'')}">TEL ${escapeHtml(c.tel)}</a>` : ''}
-          ${c.fax ? `<span class="fax-display">FAX ${escapeHtml(c.fax)}</span>` : ''}
-        </div>` : ''}
         ${c.note ? `<div class="small">${escapeHtml(c.note)}</div>` : ''}
       </div>
     `);
@@ -327,17 +320,22 @@ function renderInstitutionContacts(inst) {
   const ah = inst.contacts?.afterHours || [];
   if (ah.length > 0) {
     blocks.push(`<div class="contact-block">
-      <div class="contact-label">時間外</div>
+      <div class="contact-label">時間外の窓口</div>
       ${ah.map(c => `
         <div style="margin-bottom:6px">
           ${c.label ? `<div class="contact-dept" style="font-weight:700">${escapeHtml(c.label)}</div>` : ''}
           <div class="contact-dept">${escapeHtml(c.dept || '')}</div>
-          <div class="action-row">
-            ${c.tel ? `<a class="tel-link" href="tel:${c.tel.replace(/[^\d+]/g,'')}">TEL ${escapeHtml(c.tel)}</a>` : ''}
-            ${c.fax ? `<span class="fax-display">FAX ${escapeHtml(c.fax)}</span>` : ''}
-          </div>
+          ${c.note ? `<div class="small">${escapeHtml(c.note)}</div>` : ''}
         </div>
       `).join('')}
+    </div>`);
+  }
+  if (inst.contactPdf) {
+    blocks.push(`<div class="contact-pdf-note">
+      <p class="small">連絡先番号（TEL / FAX）は最新の連絡先一覧 PDF を参照してください。</p>
+      <div class="action-row">
+        <a class="pdf-link" href="${escapeHtml(inst.contactPdf)}" target="_blank" rel="noopener">連絡先一覧（PDF）を開く</a>
+      </div>
     </div>`);
   }
   return blocks.join('');
@@ -350,20 +348,6 @@ function labelForContact(key) {
     protocolSupport: '運用問い合わせ',
   };
   return map[key] || key;
-}
-
-function collectPhones(inst) {
-  const out = [];
-  const wd = inst.contacts?.weekday || {};
-  for (const k of Object.keys(wd)) if (wd[k]?.tel) out.push(wd[k].tel);
-  return [...new Set(out)];
-}
-
-function collectFaxes(inst) {
-  const out = [];
-  const wd = inst.contacts?.weekday || {};
-  for (const k of Object.keys(wd)) if (wd[k]?.fax) out.push(wd[k].fax);
-  return [...new Set(out)];
 }
 
 /* ===== Util ===== */

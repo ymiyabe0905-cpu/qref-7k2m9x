@@ -694,6 +694,19 @@ table#matrixTable tbody td.dimmed .cell-badge {
   margin: 2px 0 6px;
 }
 
+.contact-pdf-note {
+  margin-top: 10px;
+  padding: 12px;
+  background: #eff6ff;
+  border: 1px solid #bfdbfe;
+  border-radius: var(--radius-sm);
+}
+
+.contact-pdf-note .small {
+  margin: 0 0 8px;
+  color: var(--text);
+}
+
 /* Loading & error */
 .loading,
 .error {
