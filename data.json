@@ -6,6 +6,11 @@
     "ajisaiDrJoy": false,
     "notes": "sourceRef は原本 PDF 内での該当項目の記号（例: 2.① / 3.(1) / 5.(ア)）。検索で利用。"
   },
+  "changelog": [
+    { "date": "2026-05-27", "version": "0.5.0", "summary": "連絡先番号（TEL/FAX）をPDF参照方式に変更。各PDFの向きを補正。時間外窓口の表示を削除。スマホ表示を改善。" },
+    { "date": "2026-05-25", "version": "0.4.2", "summary": "医療C・日赤・近森の剤形/規格変更に「先発品も同様に変更可」の補足（原本記載外・別途確認）を追記。" },
+    { "date": "2026-05-21", "version": "0.4.1", "summary": "医大・国立高知のプロトコルを原本PDFと照合し不整合を修正（医大の規格例・国立高知の規格報告要否など）。" }
+  ],
   "categories": [
     { "id": "brand",          "name": "銘柄変更",                   "order": 1,  "description": "成分名同一の銘柄変更（薬価同等以下）" },
     { "id": "dosage_form",    "name": "剤形変更",                   "order": 2,  "description": "グループ内剤形変更（A/B/C グループ）" },

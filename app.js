@@ -54,6 +54,30 @@ function bindEvents() {
     renderDetail();
     renderMatrix();
   });
+
+  const changelogModal = $('#changelogModal');
+  $('#changelogBtn').addEventListener('click', () => {
+    renderChangelog();
+    changelogModal.hidden = false;
+  });
+  const closeChangelog = () => { changelogModal.hidden = true; };
+  $('#changelogClose').addEventListener('click', closeChangelog);
+  $('#changelogBackdrop').addEventListener('click', closeChangelog);
+}
+
+function renderChangelog() {
+  const log = state.data.changelog || [];
+  const body = $('#changelogBody');
+  if (log.length === 0) {
+    body.innerHTML = `<p class="placeholder">更新履歴はまだありません。</p>`;
+    return;
+  }
+  body.innerHTML = log.map(e => `
+    <div class="changelog-entry">
+      <div class="changelog-date">${escapeHtml(e.date)}${e.version ? ` <span class="changelog-ver">v${escapeHtml(e.version)}</span>` : ''}</div>
+      <div class="changelog-summary">${escapeHtml(e.summary)}</div>
+    </div>
+  `).join('');
 }
 
 /* ===== Chips ===== */
@@ -139,7 +163,10 @@ function renderMatrix() {
           : p.feedback === '不要'
           ? `<div class="cell-badge no-report">報告不要</div>`
           : '';
+        const suppMark = (p.notes && p.notes.includes('原本記載外'))
+          ? `<span class="cell-supp" title="原本外の補足あり">補</span>` : '';
         return `<td class="has-protocol${selected}${dim}${searchDim}${colHl}${cross}" data-pid="${escapeHtml(p.id)}">
+          ${suppMark}
           <span class="cell-mark">${escapeHtml(p.simplification || '○')}</span>
           ${badge}
         </td>`;
@@ -200,6 +227,7 @@ function renderDetail() {
     <h2 class="detail-title">${escapeHtml(cat.name)}</h2>
     <div class="badge-row">
       <span class="badge badge-ok">簡素化 ${escapeHtml(p.simplification)}</span>
+      ${(p.notes && p.notes.includes('原本記載外')) ? `<span class="badge badge-supp">原本外の補足あり</span>` : ''}
     </div>
 
     ${renderFeedbackCallout(p, inst)}

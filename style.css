@@ -66,6 +66,28 @@ html, body {
   color: var(--text-muted);
 }
 
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.changelog-btn {
+  flex-shrink: 0;
+  border: 1px solid var(--border-strong);
+  background: var(--card);
+  color: var(--text-muted);
+  font-size: 11px;
+  padding: 4px 10px;
+  border-radius: 14px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.changelog-btn:active {
+  background: var(--primary-light);
+}
+
 .search-bar {
   position: relative;
   margin-bottom: 8px;
@@ -450,6 +472,19 @@ table#matrixTable tbody td.dimmed .cell-badge {
   color: #166534;
 }
 
+.cell-supp {
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  font-size: 9px;
+  font-weight: 700;
+  background: #fde68a;
+  color: #78350f;
+  border-radius: 3px;
+  padding: 0 3px;
+  line-height: 1.5;
+}
+
 .empty-state {
   text-align: center;
   padding: 32px;
@@ -508,6 +543,7 @@ table#matrixTable tbody td.dimmed .cell-badge {
 .badge-report   { background: #fef3c7; color: #92400e; }
 .badge-noreport { background: #e0e7ff; color: #3730a3; }
 .badge-method   { background: #f1f5f9; color: #334155; }
+.badge-supp     { background: #fde68a; color: #78350f; }
 
 /* ===== Feedback Callout (事後報告ハイライト) ===== */
 .feedback-callout {
@@ -735,4 +771,86 @@ table#matrixTable tbody td.dimmed .cell-badge {
 
 .error {
   color: var(--bad);
+}
+
+/* ===== Modal (changelog) ===== */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal[hidden] { display: none; }
+
+.modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 23, 42, 0.5);
+}
+
+.modal-panel {
+  position: relative;
+  z-index: 1;
+  background: var(--card);
+  border-radius: var(--radius);
+  width: calc(100% - 32px);
+  max-width: 480px;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: var(--shadow-strong);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.modal-body {
+  padding: 16px;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.changelog-entry {
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.changelog-entry:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+  padding-bottom: 0;
+}
+
+.changelog-date {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--text);
+  margin-bottom: 4px;
+}
+
+.changelog-ver {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.changelog-summary {
+  font-size: 13px;
+  line-height: 1.6;
+  color: #475569;
 }

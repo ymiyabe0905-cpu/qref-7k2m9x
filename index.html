@@ -21,7 +21,10 @@
   <header class="app-header">
     <div class="header-top">
       <h1>疑義照会プロトコル</h1>
-      <span class="meta" id="metaInfo"></span>
+      <div class="header-right">
+        <span class="meta" id="metaInfo"></span>
+        <button type="button" id="changelogBtn" class="changelog-btn">更新履歴</button>
+      </div>
     </div>
     <div class="search-bar">
       <input type="search" id="searchInput" placeholder="医療機関・カテゴリ・キーワードで検索…" autocomplete="off">
@@ -61,6 +64,17 @@
       </div>
     </aside>
   </main>
+
+  <div id="changelogModal" class="modal" hidden>
+    <div class="modal-backdrop" id="changelogBackdrop"></div>
+    <div class="modal-panel" role="dialog" aria-modal="true" aria-label="更新履歴">
+      <div class="modal-header">
+        <h2>更新履歴</h2>
+        <button type="button" id="changelogClose" class="close-btn" aria-label="閉じる">×</button>
+      </div>
+      <div id="changelogBody" class="modal-body"></div>
+    </div>
+  </div>
 
   <script src="app.js"></script>
 </body>
