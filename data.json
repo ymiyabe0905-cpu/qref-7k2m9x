@@ -33,11 +33,7 @@
           "rxInquiry":        { "dept": "薬剤局 医薬品情報室", "note": "TEL は代表" },
           "insuranceInquiry": { "dept": "医療事務室",          "note": "" }
         },
-        "afterHours": [
-          { "dept": "代表（FAX / TEL）" },
-          { "dept": "ER 科ほか（時間外）" },
-          { "dept": "精神科（時間外）" }
-        ]
+        "afterHours": []
       },
       "notes": "平日時間外は FAX 送付時に併せて電話連絡をお願いする運用。規格変更も唯一フィードバック必要。",
       "contactPdf": "pdfs/別紙1_連絡先一覧.pdf",
@@ -75,10 +71,7 @@
           "chikamori_reha":     { "label": "近森リハビリテーション病院",            "dept": "薬剤部 調剤室",            "note": "" },
           "chikamori_orthoreha":{ "label": "近森オルソリハビリテーション病院",      "dept": "外来医事課",               "note": "近森オルソリハは外来医事課が処方内容窓口" }
         },
-        "afterHours": [
-          { "label": "近森病院 当直 PHS",        "dept": "" },
-          { "label": "近森リハ 休日時間外",      "dept": "" }
-        ]
+        "afterHours": []
       },
       "notes": "プロトコル本体は3施設共通。事後報告は処方を発行した施設のFAXへ送信する（番号は連絡先一覧PDF参照）。",
       "contactPdf": "pdfs/別紙1_連絡先一覧.pdf",

@@ -315,19 +315,6 @@ function renderInstitutionContacts(inst) {
       </div>
     `);
   }
-  const ah = inst.contacts?.afterHours || [];
-  if (ah.length > 0) {
-    blocks.push(`<div class="contact-block">
-      <div class="contact-label">時間外の窓口</div>
-      ${ah.map(c => `
-        <div style="margin-bottom:6px">
-          ${c.label ? `<div class="contact-dept" style="font-weight:700">${escapeHtml(c.label)}</div>` : ''}
-          <div class="contact-dept">${escapeHtml(c.dept || '')}</div>
-          ${c.note ? `<div class="small">${escapeHtml(c.note)}</div>` : ''}
-        </div>
-      `).join('')}
-    </div>`);
-  }
   if (inst.contactPdf) {
     blocks.push(`<div class="contact-pdf-note">
       <p class="small">連絡先番号（TEL / FAX）は最新の連絡先一覧 PDF を参照してください。</p>
